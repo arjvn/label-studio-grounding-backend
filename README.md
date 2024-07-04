@@ -111,6 +111,13 @@ Once you have made these changes, run:
 docker compose up
 ```
 
+At this point you might see a number of debug messages where the docker is trying to get a lock on the bert model's endpoint. This might take some time but its should resolve itself 
+
+```bash
+grounding_dino  | [2024-07-04 21:19:49,471] [DEBUG] [filelock::acquire::266] Lock 278521928320 not acquired on /root/.cache/huggingface/hub/.locks/models--bert-base-uncased/68d45e234eb4a928074dfd868cead0219ab85354cc53d20e772753c6bb9169d3.lock, waiting 0.05 seconds ...
+grounding_dino  | [2024-07-04 21:19:49,527] [DEBUG] [filelock::acquire::254] Attempting to acquire lock 278521928320 on /root/.cache/huggingface/hub/.locks/models--bert-base-uncased/68d45e234eb4a928074dfd868cead0219ab85354cc53d20e772753c6bb9169d3.lock
+```
+
 ## Connect the ML Backend
 
 Now you need to go back to your project settings and navigate to the "Model" section. Here if you fill in the details for the “Title” and the “URL”. The URL will be your local IP address and port 9090. Flick to enable the “Use for interactive preannotations” switch and save your settings.
@@ -137,6 +144,12 @@ At this point we should have something like this and we should be able to enter 
 ### Current BUG
 
 Currently the grounding docker is not able to access the images uploaded to the server due to some networking issues or some pathing which might have been overlooked.
+
+### BUG fixed
+
+<p align="center">
+  <img src="images/dino_label_studio.jpeg" alt="Bok Choi database in label studio" />
+</p>
 
 ```txt
 grounding_dino  | [2024-07-04 20:57:57,385] [ERROR] [dino::one_task::172] Error getting image path: Can't resolve url, neither hostname or project_dir passed: /data/upload/1/afea8d2c-IMG_4708.jpg. You can set LABEL_STUDIO_URL environment variable to use it as a hostname.
