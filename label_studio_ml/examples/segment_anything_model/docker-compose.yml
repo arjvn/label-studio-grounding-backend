@@ -12,38 +12,31 @@ services:
     deploy:
       resources:
         limits:
-            memory: 8G
+            memory: 16G
         reservations:
-            memory: 4G
-# Add this to pass through 1 GPU 
-#            devices:
-#              - driver: nvidia
-#                count: 1
-#                capabilities: [gpu]
+            memory: 8G
+            # Add this to pass through 1 GPU 
+            devices:
+              - driver: nvidia
+                count: 1
+                capabilities: [gpu]
     environment:
-      # specify these parameters if you want to use basic auth for the model server
-      - BASIC_AUTH_USER=
-      - BASIC_AUTH_PASS=
       # Change this to your model name: MobileSAM or SAM
-      - SAM_CHOICE=MobileSAM
-      - LOG_LEVEL=DEBUG
-      # Enable this to use the GPU
-      # - NVIDIA_VISIBLE_DEVICES=all
-      # specify the number of workers and threads for the model server
-      - WORKERS=1
-      - THREADS=8
-      # specify the model directory (likely you don't need to change this)
-      - MODEL_DIR=/data/models
+      SAM_CHOICE: "SAM"
+      LOG_LEVEL: "DEBUG"
+      # Set NVIDIA_VISIBLE_DEVICES to "2" to use GPU ID 2
+      NVIDIA_VISIBLE_DEVICES: "2"
+      # Configuration for the model server workers and threads
+      WORKERS: 1
+      THREADS: 8
+      # Specify the model directory (usually does not need changes)
+      MODEL_DIR: "/data/models"
 
-      # Specify the Label Studio URL and API key to access
-      # uploaded, local storage and cloud storage files.
-      # Do not use 'localhost' as it does not work within Docker containers.
-      # Use prefix 'http://' or 'https://' for the URL always.
-      # Determine the actual IP using 'ifconfig' (Linux/Mac) or 'ipconfig' (Windows).
-      - LABEL_STUDIO_HOST=
-      - LABEL_STUDIO_ACCESS_TOKEN=
+      # Label Studio URL and API key for integration
+      LABEL_STUDIO_HOST: "http://172.16.1.16:8080/"
+      LABEL_STUDIO_ACCESS_TOKEN: "3a229ce5682afbba84c16784495da8d0cadcb044"
 
     ports:
-      - 9090:9090
+      - 9091:9090
     volumes:
       - "./data/server:/data"

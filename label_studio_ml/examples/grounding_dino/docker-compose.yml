@@ -20,11 +20,11 @@ services:
       - LOG_LEVEL=DEBUG
 
       # Add these variables if you want to access the images stored in Label Studio
-      - LABEL_STUDIO_HOST=http://192.168.1.11:8080/
-      - LABEL_STUDIO_ACCESS_TOKEN=aeeb6e17475426a451ecc4be7780e4e548ca0640
+      - LABEL_STUDIO_HOST=http://172.16.1.16:8080/
+      - LABEL_STUDIO_ACCESS_TOKEN=87031d8e3063592589272b126f6c234570e7daf0
 
       # use these if you want to use segment anything instead of bounding box predictions from input text prompts
-      - USE_SAM=false  # if you want to automatically generate segment anything model predictions
+      - USE_SAM=true  # if you want to automatically generate segment anything model predictions
       - USE_MOBILE_SAM=false # whether you want to use a more efficient, yet a bit less accurate, version of the segment anything model
 
       - BOX_THRESHOLD=0.30
@@ -39,7 +39,7 @@ services:
 #              count: 1
 #              capabilities: [gpu]
     ports:
-      - "9090:9090"
+      - "9091:9090"
     volumes:
       - "./data/ml-backend:/data"
       - "./prompt.txt:/app/prompt.txt"
