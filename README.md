@@ -1,6 +1,6 @@
 # Update 1 August 2024: Ingelligent labelling and training Pipeline
 
-Setup guide is moved to Setup.md. (might need updating TODO)
+Setup guide is moved to Setup.md. (might need some updating TODO)
 
 ## Data labeling tool
 
@@ -66,5 +66,6 @@ NOTE:
 NEXT STEPS:
 
 - ⁠figure the damn rle bug out
+- update install readme
 - ⁠collect/ generate more data
 - train model as we collect more data
